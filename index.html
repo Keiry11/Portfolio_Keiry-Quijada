@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keiry Quijada | UI/UX Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>
+tailwind.config = {
+  theme: { extend: {
+    colors: { bg:'#1a1228', card:'#2d1b4e', accent:'#7c22d6', soft:'#d9c8f5', muted:'#b9a8d6' },
+    fontFamily: { sans:['Poppins','Arial','sans-serif'] }
+  } }
+}
+</script>
+<style type="text/tailwindcss">
+@layer components {
+  .chip { @apply bg-bg border border-accent text-soft px-3 py-1 rounded-lg text-sm font-medium; }
+  .btn { @apply inline-block bg-white text-bg px-5 py-2 rounded-md font-semibold hover:bg-soft transition-colors; }
+  .btn-primary { @apply inline-block bg-accent text-white px-5 py-2 rounded-md font-semibold hover:bg-purple-500 transition-colors; }
+  .pill { @apply border-2 border-soft text-soft px-4 py-1.5 rounded-full text-sm hover:bg-soft hover:text-bg transition-colors; }
+  .card { @apply bg-card rounded-2xl p-6; }
+  .sec { @apply py-12 md:py-20; }
+  .h2 { @apply text-3xl font-bold mb-2; }
+  .sub { @apply text-muted mb-8 max-w-prose; }
+  .role { @apply bg-bg border-l-4 border-accent rounded-r-xl px-5 py-4 my-4; }
+  .shot { @apply w-full aspect-[4/3] object-cover rounded-xl bg-bg; }
+}
+html { color-scheme: dark; }
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible { outline: 3px solid #d9c8f5; outline-offset: 3px; }
+</style>
+<style>
+
+.flip-card { perspective: 1400px; cursor: pointer; border-radius: 1rem; margin-bottom: 2rem; }
+.flip-card:focus-visible { outline: 3px solid #d9c8f5; outline-offset: 4px; }
+.flip-inner { display: grid; transition: transform .7s cubic-bezier(.4,.2,.2,1); transform-style: preserve-3d; }
+.flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+.flip-front, .flip-back {
+  grid-area: 1 / 1; padding: 1.75rem; border-radius: 1rem;
+  backface-visibility: hidden; -webkit-backface-visibility: hidden;
+  background: #2d1b4e;
+}
+.flip-back { transform: rotateY(180deg); background: #3a2566; }
+.flip-card:not(.flipped) .flip-back,
+.flip-card.flipped .flip-front { pointer-events: none; }
+.flip-hint { display: block; margin-top: 1.25rem; font-size: .8rem; color: #b9a8d6; }
+
+
+.more { margin-top: .6rem; }
+.more summary {
+  display: flex; align-items: center; justify-content: space-between;
+  cursor: pointer; list-style: none;
+  font-size: .85rem; font-weight: 500; color: #d9c8f5;
+}
+.more summary::-webkit-details-marker { display: none; }
+.more summary::after {
+  content: ""; width: .5rem; height: .5rem; margin-right: .25rem;
+  border-right: 2px solid currentColor; border-bottom: 2px solid currentColor;
+  transform: rotate(45deg); transition: transform .25s;
+}
+.more[open] summary::after { transform: rotate(-135deg); }
+.more p { margin: .5rem 0 0; font-size: .85rem; color: #b9a8d6; line-height: 1.5; }
+
+
+.flip-back .shot, #certificates .shot { cursor: zoom-in; transition: transform .2s; }
+.flip-back .shot:hover, #certificates .shot:hover { transform: scale(1.02); }
+#lightbox { border: 0; padding: 0; background: transparent; max-width: 94vw; max-height: 94vh; overflow: visible; }
+#lightbox::backdrop { background: rgba(10, 6, 24, .88); }
+#lightbox img { display: block; max-width: 94vw; max-height: 88vh; object-fit: contain; border-radius: .75rem; cursor: zoom-out; }
+#lightbox button {
+  position: absolute; top: -2.5rem; right: 0; background: #fff; color: #1a1228;
+  border: 0; border-radius: 999px; width: 2rem; height: 2rem; font-size: 1.1rem; font-weight: 700; cursor: pointer;
+}
+@media (prefers-reduced-motion: reduce) { .flip-inner { transition: none; } }
+</style>
+</head>
+<body class="bg-bg text-white font-sans leading-relaxed">
+
+<header class="sticky top-0 z-10 bg-bg/90 backdrop-blur">
+  <nav class="max-w-6xl mx-auto px-6 py-3 flex flex-wrap items-center justify-between gap-3" aria-label="Main">
+    <a href="#home" class="text-xl font-bold">Keiry<span class="text-accent">.</span>Q</a>
+    <ul class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm md:text-base">
+      <li><a class="hover:text-soft" href="#about">About</a></li>
+      <li><a class="hover:text-soft" href="#tools">Skills</a></li>
+      <li><a class="hover:text-soft" href="#projects">Projects</a></li>
+      <li><a class="hover:text-soft" href="#certificates">Certificates</a></li>
+      <li><a class="btn" href="#contact">Contact Me</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+
+<section id="home" class="max-w-6xl mx-auto px-6 pt-10 md:pt-16 pb-6">
+  <div class="grid md:grid-cols-[1.1fr_.9fr] gap-10 items-center">
+    <div class="order-2 md:order-1">
+      <p class="text-xl mb-2">Hello </p>
+      <h1 class="text-4xl md:text-6xl font-bold leading-tight text-soft">I’m Keiry Quijada, UI/UX Designer</h1>
+      <p class="text-lg md:text-xl my-5">I design clear, friendly interfaces for the web.</p>
+      <div class="flex flex-wrap gap-3">
+        <a class="pill" href="https://github.com/Keiry11" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill" href="https://www.linkedin.com/in/keiry-quijada-6842b2420?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://mail.google.com/mail/?view=cm&fs=1&to=keiryquijada781@gmail.com" target="_blank" rel="noopener noreferrer" class="pill">Gmail</a>
+
+      </div>
+    </div>
+    <div class="order-1 md:order-2 w-full max-w-[280px] md:max-w-[420px] justify-self-center aspect-square rounded-3xl overflow-hidden bg-gradient-to-br from-card to-accent">
+      <img src="img/profile.jpeg" alt="Portrait of Keiry Quijada" class="w-full h-full object-cover">
+    </div>
+  </div>
+  <div class="card mt-10 flex flex-wrap items-center justify-between gap-6 !py-5">
+    <div class="flex items-center gap-3"><span class="text-4xl font-bold">3</span><span class="text-sm text-muted leading-tight">years in the<br>¡Supérate! program</span></div>
+    <div class="flex items-center gap-3"><span class="text-4xl font-bold">3</span><span class="text-sm text-muted leading-tight">projects<br>completed</span></div>
+    <div class="flex flex-wrap gap-2"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JS</span><span class="chip">Figma</span><span class="chip">GitHub</span></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="h2">About me</h2>
+    <p class="sub">High school student and UI/UX enthusiast.</p>
+    <div class="grid md:grid-cols-2 gap-8">
+      <div class="space-y-4">
+        <p>I’m a high school student in the General Baccalaureate program and a Senior member of the ¡Supérate! program, where I’ve studied English, Informatics and values since 2024.</p>
+        <p>I love web development and UX/UI design. I work well in teams, I learn quickly and I enjoy turning ideas into prototypes people can actually use.</p>
+      </div>
+      <div class="card">
+        <h3 class="text-soft font-semibold mb-3">My strengths</h3>
+        <div class="flex flex-wrap gap-2">
+          <span class="chip">Teamwork</span><span class="chip">Responsibility</span><span class="chip">Adaptability</span><span class="chip">Creativity</span><span class="chip">Communication</span>
+        </div>
+        <div class="flex gap-2.5 mt-5" aria-hidden="true">
+          <i class="w-10 h-10 rounded-lg border border-white/15 bg-[#1a1228]"></i><i class="w-10 h-10 rounded-lg border border-white/15 bg-card"></i><i class="w-10 h-10 rounded-lg border border-white/15 bg-accent"></i><i class="w-10 h-10 rounded-lg border border-white/15 bg-soft"></i><i class="w-10 h-10 rounded-lg border border-white/15 bg-white"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="tools" class="sec">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="h2">Tech stack &amp; tools</h2>
+    <p class="sub">What I use to design and build.</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div class="card"><h3 class="text-soft font-semibold mb-3">Design</h3><div class="flex flex-wrap gap-2"><span class="chip">Figma</span><span class="chip">ShadCN</span><span class="chip">Canva</span></div></div>
+      <div class="card"><h3 class="text-soft font-semibold mb-3">Frontend</h3><div class="flex flex-wrap gap-2"><span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">JavaScript</span><span class="chip">Tailwind CSS</span></div></div>
+      <div class="card"><h3 class="text-soft font-semibold mb-3">Tools</h3><div class="flex flex-wrap gap-2"><span class="chip">Git &amp; GitHub</span><span class="chip">Word</span><span class="chip">Excel</span><span class="chip">Office 365</span></div></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="projects" class="sec">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="h2">Featured projects</h2>
+    <p class="sub">Team projects from the ¡Supérate! program.<br> My role in all of them: UI/UX design.</br> </p>
+
+    <!-- Circle Vibe (2024) -->
+    <div class="flip-card" tabindex="0" role="button" aria-label="Flip project card: Project title">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+            <h3 class="text-2xl font-semibold">Circle Vibe | Hackathon</h3>
+            <span class="bg-accent px-3.5 py-0.5 rounded-full text-sm">2024</span>
+          </div>
+          <details class="more">
+                <summary>See Details</summary>
+                          <p>Circle Vibe is an app designed to encourage civic engagement and help communities identify and address problems in their environment. Through it, users can report issues affecting their community, such as damaged streets, fallen trees, or other needs, adding a description, location, and photos to facilitate identification. 
+            It also allows users to view problems reported by others, learn about implemented solutions, review the results, and find local services that can help resolve these situations. 
+            Its main objective is to connect citizens, promote collaboration, and facilitate the search for solutions to improve their communities.</p>
+              </details>
+          <div class="flex flex-wrap gap-2 my-4"><span class="chip">Figma</span><span class="chip">PowerApps</span><span class="chip">Planner</span></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <img class="shot" src="img/Circle Vibe.png" alt="Wireframes of project 2024">
+            <img class="shot" src="img/CircleV_inicio.png" alt="Style guide of project 2024">
+          </div>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a class="btn-primary" href="https://www.figma.com/proto/PfklldHxrn5rvueVPP3UEd/Circle-Vibe?node-id=10-2&p=f&t=DufDZOU9SeZrKP8O-1&scaling=min-zoom&content-scaling=fixed&page-id=0%3A1" target="_blank" rel="noopener" onclick="event.stopPropagation()">Figma prototype</a>
+            <a class="btn-primary" href="https://www.canva.com/design/DAGWZ-cA-7M/Td6RWhSWS04bluipvALn4w/edit" target="_blank" rel="noopener" onclick="event.stopPropagation()">Canva Video</a>
+          </div>
+          <small class="flip-hint">Tap the card to see my contributions ↻</small>
+        </div>
+        <div class="flip-back">
+          <h3 class="text-2xl font-semibold">My role &amp; contributions</h3>
+          <div class="role">UI/UX Designer. I designed two pages of the app and also worked them in Power Apps. Additionally I edited the video for the app.</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
+            <div>
+              <img class="shot" src="img/video_Cv.png" alt="Page designed by Keiry, 1">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I created and edited the video about our app.</p>
+              </details>
+            </div>
+            <div>
+              <img class="shot" src="img/inicioS_cv.png" alt="Page designed by Keiry, 2">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I designed this page in Figma and worked on it simultaneously in PowerApps.</p>
+              </details>
+            </div>
+            <div>
+              <img class="shot" src="img/reporte_cv.png" alt="Page designed by Keiry, 3">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I designed this page in Figma and worked on it simultaneously in PowerApps.</p>
+              </details>
+            </div>
+          </div>
+          <small class="flip-hint">Tap to go back ↻</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agrored (2025) -->
+    <div class="flip-card" tabindex="0" role="button" aria-label="Flip project card: Agricultural Website">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+            <h3 class="text-2xl font-semibold">Agrored | Expo</h3>
+            <span class="bg-accent px-3.5 py-0.5 rounded-full text-sm">2025</span>
+          </div>
+          <details class="more">
+                <summary>See Details</summary>
+                <p>AgroRed is a web platform designed to connect wholesale buyers and sellers of agricultural products in El Salvador, facilitating product marketing and improving buying and selling processes. The project aims to solve common problems in the agricultural sector, such as lack of inventory control, logistical difficulties, and a lack of information on product quality and availability. Its features include a product catalog with updated photos, purchase requests and agreements between sellers and buyers, as well as logistics plans to facilitate deliveries.</p>
+              </details>
+          <div class="flex flex-wrap gap-2 my-4"><span class="chip">Next.js</span><span class="chip">Figma</span><span class="chip">Clerk</span></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <img class="shot" src="img/agrored.jpeg" alt="Wireframes of the agricultural website">
+            <img class="shot" src="img/agro_inicio.png" alt="Style guide of the agricultural website">
+          </div>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a class="btn-primary" href="https://agro-red-c1ad.vercel.app/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Project</a>
+          </div>
+          <small class="flip-hint">Tap the card to see my contributions ↻</small>
+        </div>
+        <div class="flip-back">
+          <h3 class="text-2xl font-semibold">My role &amp; contributions</h3>
+          <div class="role">UI/UX Designer. I designed specific pages of the site and kept their layout and style consistent with the rest of the team’s work.</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
+            <div>
+              <img class="shot" src="img/3.png" alt="Page designed by Keiry, 1">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I designed the pages for creating your account on the website, trying to make it easy for the user to register.</p>
+              </details>
+            </div>
+            <div>
+              <img class="shot" src="img/2.png" alt="Page designed by Keiry, 2">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I designed the product page where everything available could be viewed. Items could be added to the cart and the user could customize the quantity.</p>
+              </details>
+            </div>
+            <div>
+              <img class="shot" src="img/1.png" alt="Page designed by Keiry, 3">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I created the design for the shopping cart page, where you could see all the products you wanted to buy, remove products, add more quantities, and see the total of the entire purchase.</p>
+              </details>
+            </div>
+          </div>
+          <small class="flip-hint">Tap to go back ↻</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- Finans (2026) -->
+    <div class="flip-card" tabindex="0" role="button" aria-label="Flip project card: Finance Website">
+      <div class="flip-inner">
+        <div class="flip-front">
+          <div class="flex flex-wrap items-baseline justify-between gap-3 mb-2">
+            <h3 class="text-2xl font-semibold">Finans | ExpoTech</h3>
+            <span class="bg-accent px-3.5 py-0.5 rounded-full text-sm">2026</span>
+          </div>
+          <details class="more">
+                <summary>See Details</summary>
+                <p>Finans is a digital financial management platform designed to facilitate the administration of micro and small enterprises (MSEs), helping them to better control their financial resources. It allows users to record income, expenses, savings, and debts, consult statistics, and generate reports. In addition, it integrates an artificial intelligence assistant called Kuali, which provides guidance on business finances and offers predictions based on recorded data. The project aims to simplify financial management through accessible, intuitive technological tools tailored to the needs of small business owners.</p>
+              </details>
+          <div class="flex flex-wrap gap-2 my-4"><span class="chip">Next.js</span><span class="chip">JavaScript</span><span class="chip">Tailwind CSS</span><span class="chip">ShadCN</span><span class="chip">Figma</span><span class="chip">PostgreSQL</span><span class="chip">Supabase</span><span class="chip">Prisma</span><span class="chip">Groq</span><span class="chip">Clerk</span></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <img class="shot" src="img/finans.jpeg" alt="Wireframes of the finance website">
+            <img class="shot" src="img/Finans_inicio.png" alt="Style guide of the finance website">
+          </div>
+          <div class="mt-5 flex flex-wrap gap-3">
+            <a class="btn-primary" href="https://finans-website.onrender.com/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Project</a>
+          </div>
+          <small class="flip-hint">Tap the card to see my contributions ↻</small>
+        </div>
+        <div class="flip-back">
+          <h3 class="text-2xl font-semibold">My role &amp; contributions</h3>
+          <div class="role">UI/UX Designer. I designed the interface and user flow, working closely with my team to turn the idea into a prototype.</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
+            <div>
+              <img class="shot" src="img/FAQ.png" alt="Page designed by Keiry, 1">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I was responsible for the design of this page and its implementation, allowing users to interact with the drop-down questions to find information about Finans' features and operation. I also added a contact section via email to facilitate communication and answer any further questions.</p>
+              </details>
+            </div>
+            <div>
+              <img class="shot" src="img/incomes.png" alt="Page designed by Keiry, 2">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I was responsible for the design and programming of this website, developing an interface that allows users to record their business income through a form that includes the type of income, the amount received, the date, and an optional description. I also designed the income history section, which displays all entries, their respective amounts, and dates, facilitating the tracking and control of incoming funds.</p>
+              </details>
+            </div>
+            <div>
+              <img class="shot" src="img/AI.png" alt="Page designed by Keiry, 3">
+              <details class="more">
+                <summary>See Details</summary>
+                <p>I designed the model of our AI on the website, trying to make it visually appealing and easy for the user to understand.</p>
+              </details>
+            </div>
+          </div>
+          <small class="flip-hint">Tap to go back ↻</small>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</section>
+
+<!-- 4. CERTIFICATES -->
+<section id="certificates" class="sec">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="h2">Courses &amp; certificates</h2>
+    <p class="sub">Required module courses and extra certifications.</p>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 items-start">
+      <div class="card flex flex-col gap-3"><img class="shot" src="img/Curso_1.png" alt="Certificate: Course 1"><h3 class="text-soft font-semibold">Course 1 (module)</h3><a class="font-medium text-soft hover:underline" href="img/Curso_1.png" target="_blank" rel="noopener">View certificate</a></div>
+      <div class="card flex flex-col gap-3"><img class="shot" src="img/Curso_2.png" alt="Certificate: Course 2"><h3 class="text-soft font-semibold">Course 2 (module)</h3><a class="font-medium text-soft hover:underline" href="img/Curso_2.png" target="_blank" rel="noopener">View certificate</a></div>
+      <div class="card flex flex-col gap-3"><img class="shot" src="img/Curso_3.png" alt="Certificate: Course 3"><h3 class="text-soft font-semibold">Course 3 (module)</h3><a class="font-medium text-soft hover:underline" href="img/Curso_3.png" target="_blank" rel="noopener">View certificate</a></div>
+      <div class="card flex flex-col gap-3"><img class="shot" src="img/Excel Associate.pdf.png" alt="Certificate: Microsoft Excel"><h3 class="text-soft font-semibold">Microsoft Excel (2025)</h3><a class="font-medium text-soft hover:underline" href="img/Excel Associate.pdf.png" target="_blank" rel="noopener">View certificate</a></div>
+      <div class="card flex flex-col gap-3"><img class="shot" src="img/Certi_toeic.jpeg" alt="Certificate: ETS TOEIC L&amp;R"><h3 class="text-soft font-semibold">ETS TOEIC L&amp;R (2025)</h3><a class="font-medium text-soft hover:underline" href="img/Certi_toeic.jpeg" target="_blank" rel="noopener">View certificate</a></div>
+      <div class="card flex flex-col gap-3"><img class="shot" src="img/Excel Expert.png" alt="Certificate: Microsoft Excel Expert"><h3 class="text-soft font-semibold">Microsoft Excel Expert (2026)</h3><a class="font-medium text-soft hover:underline" href="img/Excel Expert.png" target="_blank" rel="noopener">View certificate</a></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="contact" class="sec">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="h2">Contact</h2>
+    <p class="sub">Send me a message.</p>
+
+    <form id="contact-form" class="grid gap-4 max-w-xl">
+      <input type="hidden" name="access_key" value="38c157c2-ca59-4371-b9bc-073363fea8df">
+      <input type="hidden" name="subject" value="New message from Keiry's Portfolio">
+      <input type="hidden" name="from_name" value="Keiry Quijada Portfolio">
+      <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off">
+      <div>
+        <label for="name" class="font-medium">Name</label>
+      <input id="name" type="text" name="name" placeholder="Your name" autocomplete="name" required maxlength="100" class="w-full mt-1 p-3 rounded-lg border border-accent bg-card text-white outline-none focus:ring-2 focus:ring-accent">
+      </div>
+      <div>
+        <label for="email" class="font-medium">Email</label>
+        <input id="email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required maxlength="150" class="w-full mt-1 p-3 rounded-lg border border-accent bg-card text-white outline-none focus:ring-2 focus:ring-accent">
+      </div>
+      <div>
+        <label for="msg" class="font-medium">Message</label>
+        <textarea id="msg" name="message" rows="5" placeholder="Write your message here..." required maxlength="3000" class="w-full mt-1 p-3 rounded-lg border border-accent bg-card text-white outline-none focus:ring-2 focus:ring-accent"></textarea>
+      </div>
+      <button type="submit" id="submit-button" class="btn-primary disabled:opacity-60 disabled:cursor-not-allowed">Send message</button>
+      <p id="form-status" class="text-sm mt-1" role="status" aria-live="polite"></p>
+    </form>
+
+
+    <div class="flex flex-wrap gap-3 mt-7">
+      <a href="https://mail.google.com/mail/?view=cm&fs=1&to=keiryquijada781@gmail.com" target="_blank" rel="noopener noreferrer" class="pill">Gmail</a>
+      <a class="pill" href="https://www.linkedin.com/in/keiry-quijada-6842b2420?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="pill" href="https://github.com/Keiry11" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="text-center text-muted py-8 px-6 border-t border-card">© 2026 Keiry Quijada. Designed and built with care.</footer>
+
+<dialog id="lightbox" aria-label="Imagen ampliada">
+  <button type="button" aria-label="Cerrar">&times;</button>
+  <img src="" alt="">
+</dialog>
+
+<script>
+document.querySelectorAll('.flip-card').forEach(function (card) {
+  card.addEventListener('click', function () { card.classList.toggle('flipped'); });
+  card.querySelectorAll('details').forEach(function (d) {
+    d.addEventListener('click', function (e) { e.stopPropagation(); });
+  });
+  card.addEventListener('keydown', function (e) {
+    if (e.target !== card) return;
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.classList.toggle('flipped'); }
+  });
+});
+
+var lb = document.getElementById('lightbox');
+var lbImg = lb.querySelector('img');
+function openLb(img) { lbImg.src = img.src; lbImg.alt = img.alt; lb.showModal(); }
+document.querySelectorAll('.flip-back .shot, #certificates .shot').forEach(function (img) {
+  img.tabIndex = 0;
+  img.setAttribute('role', 'button');
+  img.addEventListener('click', function (e) { e.stopPropagation(); openLb(img); });
+  img.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); openLb(img); }
+  });
+});
+
+document.querySelectorAll('#certificates .card').forEach(function (c) {
+  var img = c.querySelector('img'), link = c.querySelector('a');
+  if (!img || !link) return;
+  link.addEventListener('click', function (e) { e.preventDefault(); openLb(img); });
+});
+lb.addEventListener('click', function () { lb.close(); });
+</script>
+<script>
+
+
+  const contactForm = document.getElementById("contact-form");
+  const formStatus = document.getElementById("form-status");
+  const submitButton = document.getElementById("submit-button");
+
+  contactForm.addEventListener("submit", async function(event) {
+
+
+    event.preventDefault();
+
+
+    if (submitButton.disabled) return;
+
+
+    submitButton.disabled = true;
+    submitButton.textContent = "Sending...";
+
+
+    formStatus.textContent = "";
+    formStatus.className = "text-sm mt-1";
+
+
+    const formData = new FormData(contactForm);
+
+    try {
+
+      
+      const response = await fetch(
+        "https://api.web3forms.com/submit",
+        {
+          method: "POST",
+          headers: {
+            "Accept": "application/json"
+          },
+          body: formData
+        }
+      );
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+
+
+        formStatus.textContent =
+          "Your message has been sent successfully! Thank you for contacting me.";
+
+        formStatus.classList.add("text-green-400");
+
+
+        contactForm.reset();
+
+      } else {
+
+
+        formStatus.textContent =
+          result.message || "Unable to send your message. Please try again.";
+
+        formStatus.classList.add("text-red-400");
+
+      }
+
+    } catch (error) {
+
+      
+      formStatus.textContent =
+        "Something went wrong. Please check your connection and try again.";
+
+      formStatus.classList.add("text-red-400");
+
+      console.error("Web3Forms error:", error);
+
+    } finally {
+
+
+      submitButton.disabled = false;
+      submitButton.textContent = "Send message";
+
+    }
+
+  });
+</script>
+</body>
+</html>
